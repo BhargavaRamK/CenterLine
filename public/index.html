@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+        <title> Adidas </title>
+
+        <!-- Babylon.js -->
+        
+
+        <script src="./lib/dijkstra.js"></script>
+        <script src="https://unpkg.com/simplify-js@1.2.3/simplify.js"></script>
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+        <script src="https://code.jquery.com/pep/0.4.2/pep.min.js"></script>
+        <script type="text/javascript" src="./lib/paper.js"></script>
+        <script type="text/javascript" src="./lib/imagetracer_v1.2.5.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.6.2/dat.gui.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>  
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/svg.js/3.0.13/svg.js"></script>  
+
+        <style>
+            html, body {
+                overflow: hidden;
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            
+            #dropbox {
+                border: 1px;
+                border-style: dashed;
+                border-color:black;
+                height: 1000px;
+                width: 1000px;
+                touch-action: none;
+            }
+            #Canvas {
+                border: 1px;
+                border-style: dashed;
+                border-color:blue;
+                width: 100%;
+                height: 100%;
+                touch-action: none;
+            }
+            text {
+                font: 64px Spectral;
+                letter-spacing: 0.08em;
+                fill: #444;
+            }
+
+            line, path {
+                stroke-width: 1px;
+                fill: none;
+            }
+
+            circle {
+                fill: black;
+            }
+
+            .edge, .clipped {
+                stroke: #999;
+            }
+
+            .longest,
+            #centerline {
+                stroke: gray;
+                stroke-width: 3px;
+            }
+
+
+
+        </style>
+    </head>
+<body>
+    <input name="image" type="file" id="image" accept="image/*" style="display:none" onchange="handleFiles(this.files)">
+    <div id="canvascontainer"></div>
+    
+    <div id="imageBorder">
+            
+        
+        
+        <div id="imageContainer">
+
+            <div class="rangeslider"> 
+                    <input type="range" min="-100" max="100" value="1"
+                                    class="myslider" id="simplify_slider"> 
+                                    <label for="simplify_slider">Simplify Slider </label>                
+                    </div> 
+
+            <div class="rangeslider"> 
+                    <input type="range" min="1" max="100" value="1"
+                                    class="myslider" id="flatten_slider"> 
+                                    <label for="flatten_slider">Flatten Slider </label>   
+                    </div> 
+                    
+            <div class="rangeslider"> 
+                    <input type="range" min="5" max="100" value="1"
+                                    class="myslider" id="PointsCount"> 
+                                    <label for="PointsCount">Points Count </label>   
+                    </div> 
+            <button onclick="SaveSVG()">Save SVG</button>
+            <button id="fileSelect" type="button" class="btn btn-primary btn-block">Upload Image</button>
+           
+            
+            <div id="dropbox">
+
+                <svg id="drawing"></svg>
+                <canvas id="Canvas"></canvas>
+                <i class="fa fa-picture-o" aria-hidden="true"></i>  
+                
+        </div>
+        
+    </div>
+
+    <script src="vector.js"></script>
+</body>
+</html>

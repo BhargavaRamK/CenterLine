@@ -1,0 +1,23 @@
+{
+  "name": "rhinoviewer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "copy-paste": "^1.3.0",
+    "express": "^4.17.1",
+    "morgan": "^1.9.1",
+    "nodemon": "^1.19.2",
+    "paper": "^0.12.3",
+    "socketio": "^1.0.0",
+    "svg.js": "^2.7.1",
+    "three": "^0.108.0",
+    "three-obj-loader": "^1.1.3"
+  }
+}
