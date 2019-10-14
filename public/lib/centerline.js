@@ -1,6 +1,6 @@
 //Pre required libraries
 // 1. Paper Js https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.12.2/paper-full.js
-// 2. d3 Js https://cdnjs.cloudflare.com/ajax/libs/d3/5.12.0/d3.js
+// 2. d3 Js https://d3js.org/d3.v4.min.js
 // 3. dijkstra.js library. 
 
 
