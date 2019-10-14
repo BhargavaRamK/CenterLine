@@ -1,3 +1,9 @@
+//Pre required libraries
+// 1. Paper Js https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.12.2/paper-full.js
+// 2. d3 Js https://cdnjs.cloudflare.com/ajax/libs/d3/5.12.0/d3.js
+// 3. dijkstra.js library. 
+
+
 function CenterLine(path_org, PointsCount_value) 
 {
     var test_path = path_org.clone();
@@ -6,7 +12,6 @@ function CenterLine(path_org, PointsCount_value)
     path_org.remove();
     var centerline = [];
 
-    console.log(test_path.children.length);
     for(var i =0; i<test_path.children.length; i++)
     {
       try
@@ -18,19 +23,16 @@ function CenterLine(path_org, PointsCount_value)
         var {polygon, edges} = drawVoronoi(polygon) 
         var new_edge = clipVoronoi({polygon, edges});
         var line = findCenterline(new_edge);
-        // simplifyCenterline(centerline)
+
         centerline.push(line);
       }
       catch(e)
       {
-          console.log("Error: " + e);
+          console.log("Error In CenterLine Js: " + e);
       }
           
     }
-
     return centerline;
-
-    
 }
 
 
@@ -183,10 +185,6 @@ function findCenterline(edges) {
       })
       .attr("d", smoothLine(centerline));
   }
-  
-
-  
-
 
   function drawCircle(sel) {
     sel
@@ -204,7 +202,6 @@ function findCenterline(edges) {
       .attr("");
   
   }
-  
   
   function findIntersection(a1, a2, b1, b2) {
     const uaT = (b2[0] - b1[0]) * (a1[1] - b1[1]) - (b2[1] - b1[1]) * (a1[0] - b1[0]),

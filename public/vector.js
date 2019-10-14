@@ -1,26 +1,25 @@
 
 var draw = SVG(document.querySelector('#drawing')).size(1000, 1000)
-
+//Initialize Sliders 
 var simplifyslider = document.getElementById("simplify_slider"); 
 var simplify_slider = simplifyslider.value;
 var flatterslider = document.getElementById("flatten_slider"); 
 var flatten_slider = flatterslider.value;
 var PointsCount = document.getElementById("PointsCount"); 
 var PointsCount_value = PointsCount.value;
+
+
+//Initialize Paper Js
 var canvas = document.getElementById('Canvas')
 var scope = paper.setup(canvas)
 var path = new paper.Path();
 
-
-var svgtoextract = ""
-var children;
-
 var url = "";
 var item;
-
-var centerline;
-
 var update_item;
+
+paperjs(url);
+
 
 function paperjs(url)
 {
@@ -30,20 +29,41 @@ function paperjs(url)
         path.position = new paper.Point(path.bounds.width/2, path.bounds.height/2)
         path.visible = false ;
         PointsCount_value = 20;
-        var centerline = CenterLine(path, PointsCount_value) 
-        console.log(centerline.length);
-        
+
+        //Center Line Function
+        var centerline = CenterLine(path, PointsCount_value)
+        console.log(centerline[0]); //Print CenterLine Generated!
     });
 }
 
+
+
+
+
+
+
+
+
+
+
+
+//----------------------- Sliders -----------------------
+
 PointsCount.oninput = function() { 
   PointsCount_value = this.value;
-  const svg = d3.select("svg")
-  svg.selectAll("*").remove();
-
   CenterLine(path, PointsCount_value) 
-  console.log(centerline);
-  //paperjs(url)
+}
+
+
+simplifyslider.oninput = function() { 
+  simplify_slider = this.value;
+  //simplify(simplify_slider, flatten_slider)
+}
+
+
+flatterslider.oninput = function() { 
+  flatten_slider = this.value;
+  //simplify(simplify_slider, flatten_slider)
 }
 
 
@@ -53,57 +73,7 @@ PointsCount.oninput = function() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//----------------------- To Simplify/Flatten path -----------------------
 function simplify(simplify_slider, flatten_slider){
     if(update_item)
     {
@@ -126,25 +96,7 @@ function simplify(simplify_slider, flatten_slider){
 }
 
 
-
-
-
-simplifyslider.oninput = function() { 
-  simplify_slider = this.value;
-  simplify(simplify_slider, flatten_slider)
-  //paperjs(url)
-}
-
-
-flatterslider.oninput = function() { 
-  flatten_slider = this.value;
-  simplify(simplify_slider, flatten_slider)
-  //paperjs(url)
-}
-
-
-
-
+// Function for Adding SVG File to the project 
 function handleFiles(files) {
 
     var file = files[0];
@@ -202,6 +154,9 @@ function handleFiles(files) {
 }
 
 
+
+//----------------------- To Save SVG File -----------------------
+
 function SaveSVG()
 {
   fileName = "paperjs_example.svg"
@@ -216,7 +171,7 @@ function SaveSVG()
 
 
 
-// Event Handler
+//----------------------- Event Handlers -----------------------
 
 function eventImageSetup() {
 
@@ -253,3 +208,6 @@ function dragenter(e) {
 
 
 eventImageSetup();
+
+
+
