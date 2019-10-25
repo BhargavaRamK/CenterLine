@@ -32,6 +32,7 @@ function paperjs(url)
 
         //Center Line Function
         var centerline = CenterLine(path, PointsCount_value)
+        console.log("Center Line:")
         console.log(centerline[0]); //Print CenterLine Generated!
     });
 }

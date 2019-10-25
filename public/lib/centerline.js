@@ -38,24 +38,35 @@ function CenterLine(path_org, PointsCount_value)
 
 function getpolygon(centerline_path)
 {
-  const svg = d3.select("svg").append("g");
-  //console.log(centerline_path);
   const length = centerline_path.getTotalLength();
-
-  const polygon = d3
-    .range(PointsCount_value)
-    .map(i => centerline_path.getPointAtLength(length * i / PointsCount_value))
-    .map(d => [d.x, d.y]);
-
+  const polygon= [];
+  for(var i=0; i <PointsCount_value ; i++)
+  {
+    var xy = [];
+    var position = centerline_path.getPointAtLength(length * i / PointsCount_value)
+    xy.push(position.x);
+    xy.push(position.y);
+    polygon.push(xy)
+  }
   return polygon;
-
 }
 
 function drawVoronoi(polygon) {
-    const svg = d3.select("svg").append("g");
-    const [x0, x1] = d3.extent(polygon.map(d => d[0])),
-      [y0, y1] = d3.extent(polygon.map(d => d[1]));
-  
+    var x_value = [];
+    for(var i = 0; i<polygon.length; i++)
+    {
+      x_value.push(polygon[i][0])
+    }
+    var y_value = [];
+    for(var i = 0; i<polygon.length; i++)
+    {
+      y_value.push(polygon[i][1])
+    }
+    const [x0, x1] = [Math.min.apply(Math, x_value), Math.max.apply(Math, x_value)]
+    const [y0, y1] = [Math.min.apply(Math, y_value), Math.max.apply(Math, y_value)]
+
+
+
     const voronoi = d3.voronoi().extent([[x0 - 1, y0 - 1], [x1 + 1, y1 + 1]])(polygon);
   
     const edges = voronoi.edges.filter(edge => {
@@ -106,7 +117,7 @@ function clipVoronoi({ polygon, edges }) {
 // We want the "longest shortest path" as the centerline
 function findCenterline(edges) {
 
-    const svg = d3.select("svg").append("g");
+    //const svg = d3.select("svg").append("g");
     const nodes = [];
   
     // Create links between Voronoi nodes in the least efficient way possible
